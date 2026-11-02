@@ -2533,6 +2533,15 @@ function catalogAdd(id){const record=B.catalog[catalogKind].find(x=>x.catalogId=
 }
 function download(raw,name,type='application/json'){const blob=new Blob([raw],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 function exportCharacter(c=data){download(JSON.stringify(c,null,2),'jad-'+(c.identity.name||'postava').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase()+'-'+new Date().toISOString().slice(0,10)+'.json');toast('Export připraven. Ulož JSON soubor na bezpečné místo.');}
+function openImport(){
+ // A direct tap on a visible native input avoids opening Safari's picker
+ // programmatically while the Settings dialog is closing after a download.
+ openModal('Import JSON','<p>Vyber zálohu postavy ve formátu JSON. Na iPadu ji najdeš v Souborech, například ve Stažených souborech nebo na iCloudu.</p><label class="form-field" for="import-picker">Soubor postavy<input id="import-picker" type="file" accept="application/json,.json"></label><p class="hint">Současná postava se změní až po tvém potvrzení importu.</p>',()=>{});
+ document.getElementById('dialog-submit').hidden=true;
+ const picker=document.getElementById('import-picker');
+ picker.addEventListener('change',async()=>{const file=picker.files[0];try{await importCharacter(file);}finally{picker.value='';}});
+ picker.focus();
+}
 async function importCharacter(file){try{if(!file)return;if(file.size>5*1024*1024)throw Error('Import může mít nejvýše 5 MiB.');const raw=await file.text();let parsed;try{parsed=JSON.parse(raw);}catch{throw Error('Soubor není platný JSON. Vyber zálohu postavy vytvořenou Exportem JSON a zkus to znovu.');}if(!parsed||typeof parsed!=='object'||Array.isArray(parsed)||parsed.format!=='jad-character')throw Error('Soubor není postava JaD.');if(![1,2].includes(parsed.schemaVersion))throw Error('Nepodporovaná verze formátu.');const candidate=C.migrate(parsed),errs=C.validate(candidate,B.schema);if(errs.length)throw Error(errs.slice(0,3).join('\n'));await validatePortrait(candidate.story.appearance.portrait);replacePreview(candidate,'Import postavy');}catch(err){toast('Import odmítnut: '+err.message+' Současná postava zůstala zachována.',true);}finally{document.getElementById('import-file').value='';}}
 function replacePreview(candidate,title,fromGenerator=false){
  candidate=C.clone(candidate);
@@ -2699,7 +2708,7 @@ if(action==='item-to-attack'){itemToAttack(id);return;}
  if(action==='recovery-open'){closeModal();view='overview';render();document.getElementById('recovery-dice').scrollIntoView?.({block:'center'});return;}
 
  if(action==='pending-load'){loadPendingHandoff();return;}if(action==='pending-discard'){discardPendingHandoff();return;}
- if(action==='export'){exportCharacter();return;}if(action==='import'){document.getElementById('import-file').click();return;}
+ if(action==='export'){exportCharacter();return;}if(action==='import'){openImport();return;}
  if(action==='undo'){if(history.length){const before=C.clone(data),revision=data.metadata.revision+1;data=history.pop();resourceMessages=[];data.metadata.updatedAt=now();data.metadata.revision=revision;persist(before);render();toast('Poslední změna vrácena.');}return;}
  if(action==='personality-setup'){if(sectionEditing()){toast('Nejprve dokonči úpravy sekce.',true);return;}personalitySetupModal();return;}
  if(action==='books-setup'||action==='book-copy'||action==='book-available'||action==='book-recover'){if(sectionEditing()){toast('Nejdříve ulož nebo zruš úpravy.',true);return;}if(action==='books-setup'){booksSetupModal();return;}if(action==='book-copy'){bookCopyModal(id);return;}const book=JAD_BOOKS.books(data).find(b=>b.id===id);if(!book)return;if(action==='book-available'){commit(c=>{const b=JAD_BOOKS.books(c).find(b=>b.id===id);b.available=!b.available;},'Dostupnost knihy změněna.');return;}openModal('Náhradní Kniha stínů','<label class="check"><input name="book-hour" type="checkbox">Dokončil jsem hodinový rituál; původní Kniha stínů zaniká.</label><p>Samotný rituál nezhojí postavu ani neobnoví fondy. Pokud zároveň odpočíváš, dokonči odpočinek samostatně.</p>',form=>{if(commit(c=>JAD_BOOKS.recover(c,id,!!form.elements['book-hour'].checked),'Kniha stínů nahrazena.'))closeModal();},'Potvrdit rituál');return;}if(action==='special-setup'){if(sectionEditing()){toast('Nejdříve ulož nebo zruš úpravy.',true);return;}specialSetupModal();return;}if(action==='special-spell'){castModal(id);return;}if(action==='sorcery-exchange'){if(sectionEditing()){toast('Nejdříve ulož nebo zruš úpravy.',true);return;}sorceryExchangeModal();return;}if(action==='rest'){restModal();return;}if(action==='cast'){castModal(id);return;}
