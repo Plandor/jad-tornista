@@ -409,6 +409,7 @@ body:has(#portrait-preview[open]){overflow:hidden}
 .support-dialog::backdrop{background:#16212cbb}
 .support-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.support-head h2{font:600 22px/1.3 system-ui,sans-serif;margin:0}.support-head button{font:24px/1 system-ui,sans-serif;color:inherit;background:none;border:1px solid #c8baa6;border-radius:8px;min-height:44px;min-width:44px;cursor:pointer}
 .support-dialog p{margin:14px 0}.support-dialog .support-qr{display:block;width:100%;max-width:288px;height:auto;margin:16px auto}.support-account{user-select:all}.support-note{font-size:13px}.support-dialog button:focus-visible{outline:3px solid #9b6731;outline-offset:3px}
+</style><meta name="theme-color" content="#682c35"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Tornista"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="pwa-180.png"><style>.jad-pwa{position:fixed;left:12px;bottom:12px;z-index:30;max-width:min(420px,calc(100vw - 24px));font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#342820;background:#fffaf0;border:1px solid #d5c5a9;border-radius:9px;box-shadow:0 3px 16px #34282026}.jad-pwa details{padding:0 12px}.jad-pwa summary{cursor:pointer;min-height:44px;display:list-item;padding:11px 0;list-style-position:inside;font-weight:600;color:#682c35}.jad-pwa p{margin:8px 0 12px}.jad-pwa button{font:inherit;min-height:44px;padding:8px 12px;border:1px solid #d5c5a9;border-radius:6px;background:#fffaf0;color:#682c35;cursor:pointer}.jad-pwa button:disabled{opacity:.6;cursor:default}.jad-pwa button:focus-visible,.jad-pwa summary:focus-visible{outline:3px solid #9b6731;outline-offset:2px}.jad-pwa [hidden]{display:none!important}.jad-pwa details[open]{max-height:65vh;overflow:auto;padding-bottom:12px}.jad-pwa #pwa-update{padding:10px 12px;border-top:1px solid #d5c5a9}.jad-pwa .pwa-actions{display:flex;gap:8px;flex-wrap:wrap}#pwa-apply{background:#682c35;color:#fffaf0}#pwa-progress{max-width:min(420px,calc(100vw - 30px));border:1px solid #d5c5a9;border-radius:9px;background:#fffaf0;color:#342820;padding:20px}#pwa-progress::backdrop{background:#34282066}
 </style></head>
 <body data-public-site="true"><header class="topbar"><div class="brand"><img class="mark product-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+CiAgPGcgc3Ryb2tlPSIjMzgyNTFjIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgICA8cGF0aCBkPSJNMTUgMjR2LTVDMTUgOCA0OSA4IDQ5IDE5djUiIHN0cm9rZT0iI2Q3YWY3MCIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICA8cmVjdCB4PSI5IiB5PSIyMyIgd2lkdGg9IjQ2IiBoZWlnaHQ9IjM1IiByeD0iNyIgZmlsbD0iI2I3N2IzNSIvPgogICAgPHBhdGggZD0iTTkgMjRhNSA1IDAgMCAxIDUtNWgzNmE1IDUgMCAwIDEgNSA1djEyYy0xMiA5LTM0IDktNDYgMFoiIGZpbGw9IiNlMGFkNTUiLz4KICAgIDxwYXRoIGQ9Ik0yOCAyMGg4djMzaC04eiIgZmlsbD0iIzc5NTAzNSIvPgogICAgPHBhdGggZD0ibTMyIDI5IDExIDd2MTJsLTExIDctMTEtN1YzNloiIGZpbGw9IiNmNmQ3OGQiIHN0cm9rZS13aWR0aD0iMi41Ii8+CiAgICA8cGF0aCBkPSJtMzIgMjktNyAxNmgxNFptLTExIDcgNCA5LTQgM20yMi0xMi00IDkgNCAzbS0xOC0zIDcgMTAgNy0xMCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KICA8L2c+Cjwvc3ZnPgo=" width="48" height="48" alt="" aria-hidden="true"><div><strong>JaD Tornista</strong><small>Komunitní generátor postavy</small></div></div><a class="button" href="denik.html">Zpět do deníku</a></header>
 <main class="layout generator-layout"><section class="card" id="generator-intro"><h1>Generátor postavy</h1><p>Rychlá tvorba tě provede výběrem povolání, rasy a zázemí. Dovednosti povolání dopočítáme automaticky.</p><button class="primary" data-action="wizard-start">Začít / pokračovat v tvorbě</button><p class="hint">Současný deník se změní až po tvém potvrzení. Postavu lze také přenést souborem JSON.</p></section><section id="creation-page" class="creation-page card" aria-labelledby="dialog-title" hidden></section></main>
@@ -2230,6 +2231,11 @@ document.getElementById('dialog-close').addEventListener('click',closeModal);
 document.getElementById('dialog-cancel').addEventListener('click',closeModal);
 modalDialog.addEventListener('cancel',()=>{closeModal();});
 window.addEventListener('pagehide',()=>{wizardCapture();advancedCapture();});
+globalThis.JAD_PWA_GUARD=()=>{
+ if(!wizardStorage)return 'Návrh se neukládá. Nejdřív si stáhni jeho zálohu JSON.';
+ if(!creationPage.hidden||modalDialog.open)return 'Nejprve ulož návrh volbou Zavřít a pokračovat později a zavři dialog tvorby.';
+ return '';
+};
 function startingFeatFields(){
  const s=wizardDraft,context=JAD_CREATION.startingFeatPlan(B,s),feat=context.options.find(f=>f.id===s.startingFeatId),ch=s.startingFeatChoices??{};
  const select=(key,label,value,options)=>field('starting-'+key,label,value??'','select',options).replace('name="starting-'+key+'"','data-starting-feat="'+key+'"');
@@ -2266,5 +2272,70 @@ if(document.body.dataset.publicSite==='true')wizardStart();
  trigger.addEventListener('click',()=>dialog.showModal());
  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
  dialog.addEventListener('close',()=>trigger.focus());
+})();
+</script><aside class="jad-pwa" aria-label="Aplikace a offline provoz">
+  <details id="pwa-tools"><summary>Aplikace · v1.176</summary>
+    <p id="pwa-status" role="status">Připravuji použití bez internetu…</p>
+    <button type="button" id="pwa-install" hidden>Nainstalovat aplikaci</button>
+    <p>Aplikaci můžeš přidat na plochu z nabídky prohlížeče. V Safari použij Sdílet → Přidat na plochu. Na počítači hledej možnost instalace v adresním řádku nebo nabídce.</p>
+    <p>Před instalací si exportuj JSON. Pokud se v instalované aplikaci postava neobjeví, načti ji ze zálohy.</p>
+    <button type="button" id="pwa-check">Zkontrolovat aktualizaci</button>
+  </details>
+  <div id="pwa-update" hidden><p id="pwa-update-text" role="status">Je dostupná nová verze Tornisty.</p><div class="pwa-actions"><button type="button" id="pwa-apply">Aktualizovat</button><button type="button" id="pwa-later">Později</button></div></div>
+</aside>
+<dialog id="pwa-progress" aria-labelledby="pwa-progress-title"><h2 id="pwa-progress-title">Aktualizuji Tornistu</h2><p>Počkej prosím na načtení nové verze.</p></dialog>
+<script>'use strict';
+(()=>{
+ const status=document.getElementById('pwa-status'),banner=document.getElementById('pwa-update'),text=document.getElementById('pwa-update-text'),apply=document.getElementById('pwa-apply'),check=document.getElementById('pwa-check'),install=document.getElementById('pwa-install'),progress=document.getElementById('pwa-progress');
+ let registration=null,installPrompt=null,applying=false,reloadPending=false,applyTimer;
+ const guard=()=>{try{return window.JAD_PWA_GUARD?.()||'';}catch{return 'Nejprve dokonči rozpracovanou práci.';}};
+ const ask=(worker,type)=>new Promise((resolve,reject)=>{
+  if(!worker){reject(Error('Worker unavailable'));return;}
+  const channel=new MessageChannel(),timer=setTimeout(()=>{channel.port1.close();reject(Error('Timeout'));},7000);
+  channel.port1.onmessage=event=>{clearTimeout(timer);channel.port1.close();resolve(event.data);};
+  worker.postMessage({type},[channel.port2]);
+ });
+ const connection=()=>navigator.onLine?'Offline připraveno. Deník i tvorba fungují bez internetu.':'Jsi bez internetu. Používáš připravenou verzi aplikace.';
+ async function offlineStatus(){
+  try{const info=await ask(registration?.active,'STATUS');status.textContent=info.complete?connection():'Offline příprava není úplná. Připoj se a zkus kontrolu znovu.';}catch{status.textContent='Offline přípravu se nepodařilo ověřit. Prozatím zůstaň připojený k internetu.';}
+ }
+ async function offer(){
+  if(!registration?.waiting||!registration.active)return;
+  banner.hidden=false;
+  text.textContent='Je dostupná nová verze Tornisty. Aktualizuj, až dokončíš práci.';
+  try{const info=await ask(registration.waiting,'STATUS');text.textContent='Je připravená verze '+info.version+'. Aktualizuj, až dokončíš práci.';}catch{}
+ }
+ function finishReload(){clearTimeout(applyTimer);window.location.reload();}
+ function failUpdate(message){applying=false;clearTimeout(applyTimer);if(progress.open)progress.close();apply.disabled=false;text.textContent=message;banner.hidden=false;}
+ apply.addEventListener('click',async()=>{
+  const reason=guard();if(reason){text.textContent=reason;return;}
+  if(reloadPending){finishReload();return;}
+  if(!registration?.waiting){text.textContent='Nová verze už není připravená. Zkus zkontrolovat aktualizaci.';return;}
+  applying=true;apply.disabled=true;progress.showModal();
+  applyTimer=setTimeout(()=>failUpdate('Aktualizaci se nepodařilo dokončit. Zkus ji později.'),15000);
+  try{const result=await ask(registration.waiting,'APPLY_UPDATE');if(!result.ok)failUpdate('Nejprve zavři ostatní karty a okna Tornisty, potom zkus Aktualizovat znovu.');}catch{failUpdate('Aktualizace teď není dostupná. Tvoje postava zůstává zachovaná.');}
+ });
+ progress.addEventListener('cancel',event=>{if(applying)event.preventDefault();});
+ document.getElementById('pwa-later').addEventListener('click',()=>{banner.hidden=true;});
+ window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;install.hidden=false;});
+ install.addEventListener('click',async()=>{const prompt=installPrompt;if(!prompt)return;try{await prompt.prompt();await prompt.userChoice;}catch{}installPrompt=null;install.hidden=true;});
+ window.addEventListener('appinstalled',()=>{install.hidden=true;installPrompt=null;});
+ if(!('serviceWorker' in navigator)||!window.isSecureContext){status.textContent='Tento prohlížeč nepodporuje offline přípravu. Web můžeš používat s internetem.';check.disabled=true;return;}
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{
+  if(applying){const reason=guard();if(reason){reloadPending=true;failUpdate(reason);return;}finishReload();}
+  else if(registration)offlineStatus(); // Never reload another page automatically.
+ });
+ check.addEventListener('click',async()=>{
+  if(!registration)return;
+  check.disabled=true;status.textContent='Kontroluji dostupnou verzi…';
+  try{await registration.update();await offlineStatus();if(registration.waiting)await offer();else status.textContent+=registration.installing?' Připravuji novou verzi…':' Kontrola dokončena.';}catch{status.textContent='Kontrola není dostupná. Pokud máš offline verzi připravenou, můžeš pokračovat bez internetu.';}finally{check.disabled=false;}
+ });
+ for(const event of ['online','offline'])window.addEventListener(event,()=>{if(registration)offlineStatus();});
+ navigator.serviceWorker.register(new URL('sw.js',location.href),{scope:'./',updateViaCache:'none'}).then(reg=>{
+  registration=reg;
+  if(reg.waiting)offer();
+  reg.addEventListener('updatefound',()=>{const worker=reg.installing;if(!worker)return;worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&reg.waiting)offer();if(worker.state==='redundant')status.textContent='Novou offline verzi se nepodařilo připravit. Dosavadní verze zůstává k dispozici.';});});
+  navigator.serviceWorker.ready.then(()=>offlineStatus()).catch(()=>{});
+ }).catch(()=>{status.textContent='Offline příprava se nepodařila. Web dál funguje s internetem; zkus to později.';});
 })();
 </script></body></html>
