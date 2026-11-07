@@ -31,7 +31,9 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
 
 .product-footer .license-badge{display:flex;align-items:center;justify-content:center;width:88px;height:88px;overflow:hidden;border-radius:50%;background:#fff9ec}.product-footer .license-badge img{width:164px;max-width:none;height:auto;padding:0;background:none;border-radius:0;filter:none;flex:none}
 
-.roadmap{border-top:1px solid var(--line);padding:48px 0 56px}.roadmap h2{font:400 36px/1.2 Georgia,serif;margin:0 0 32px}.roadmap-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:0;padding:0}.roadmap-track li{position:relative;border-top:1px solid #b99b6077;padding:24px 24px 0 0;min-width:0}.roadmap-track li:before{content:"";position:absolute;top:-6px;left:0;width:11px;height:11px;border-radius:50%;border:2px solid #d8b97b;background:#10252a}.roadmap-track .roadmap-now:before{background:#e2bd7a;box-shadow:0 0 0 4px #e2bd7a18}.roadmap-state{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#d8b97b}.roadmap-track h3{font-size:17px;margin:12px 0 8px;color:var(--ink)}.roadmap-track p{font-size:14px;color:var(--muted);margin:0;line-height:1.6}
+.roadmap{border-top:1px solid var(--line);padding:48px 0 56px}.roadmap h2{font:400 36px/1.2 Georgia,serif;margin:0 0 32px}.roadmap-track{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;margin:0;padding:0}.roadmap-track li{position:relative;border-top:1px solid #b99b6077;padding:24px 24px 0 0;min-width:0}.roadmap-track li:before{content:"";position:absolute;top:-6px;left:0;width:11px;height:11px;border-radius:50%;border:2px solid #d8b97b;background:#10252a}.roadmap-track .roadmap-now:before{background:#e2bd7a;box-shadow:0 0 0 4px #e2bd7a18}.roadmap-state{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#d8b97b}.roadmap-track h3{font-size:17px;margin:12px 0 8px;color:var(--ink)}.roadmap-track p{font-size:14px;color:var(--muted);margin:0;line-height:1.6}
+.roadmap-track .roadmap-done:before{content:"✓";width:15px;height:15px;top:-8px;background:#d8b97b;color:#071419;font:bold 10px/11px system-ui;text-align:center}.roadmap-done .roadmap-state{color:#d1d9d6}
+@media(min-width:651px) and (max-width:1050px){.roadmap-track{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}}
 @media(max-width:650px){.roadmap{padding-block:36px}.roadmap h2{font-size:32px}.roadmap-track{grid-template-columns:1fr}.roadmap-track li{border-top:0;border-left:1px solid #b99b6077;padding:0 0 28px 26px;margin-left:6px}.roadmap-track li:last-child{padding-bottom:0;border-left-color:transparent}.roadmap-track li:before{left:-6px;top:2px}}
 
 .hero{position:relative;isolation:isolate}.hero-copy{position:relative;z-index:1}.welcome-motes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;border-radius:0}.welcome-motes[hidden]{display:none!important}.welcome-motes span{position:absolute;left:var(--x);top:var(--y);width:4px;height:4px;border-radius:50%;background:#ffe8b1;box-shadow:0 0 6px #f1c977aa;opacity:0;animation:welcome-mote var(--time) linear var(--delay) infinite}.welcome-motes span:nth-child(3n){width:3px;height:3px}.welcome-motes.paused span{animation-play-state:paused}
@@ -40,6 +42,8 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
 @media(max-width:650px){.welcome-motes{height:245px;inset:0 0 auto}.welcome-motes span:nth-child(n+13){display:none}}
 @media(prefers-reduced-motion:reduce){.welcome-motes{display:none!important}.welcome-motes span{animation:none}}
 @media print{.welcome-motes,.ambient-toggle{display:none!important}}
+
+@media(max-width:650px){.roadmap-track .roadmap-done:before{left:-8px;top:0}}
 </style>
 <style>.product-footer{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:920px;margin:32px auto;padding:0 24px;background:none;border:0;color:inherit;font:14px/1.55 system-ui,sans-serif;text-align:center;overflow-wrap:anywhere}
 .product-footer img{display:block;flex:0 0 auto;width:72px;height:auto;max-width:100%}.product-footer p{margin:0;opacity:.78}.product-footer-dark img{filter:invert(1)}
@@ -52,7 +56,7 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
 .support-dialog::backdrop{background:#16212cbb}
 .support-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.support-head h2{font:600 22px/1.3 system-ui,sans-serif;margin:0}.support-head button{font:24px/1 system-ui,sans-serif;color:inherit;background:none;border:1px solid #c8baa6;border-radius:8px;min-height:44px;min-width:44px;cursor:pointer}
 .support-dialog p{margin:14px 0}.support-dialog .support-qr{display:block;width:100%;max-width:288px;height:auto;margin:16px auto}.support-account{user-select:all}.support-note{font-size:13px}.support-dialog button:focus-visible{outline:3px solid #9b6731;outline-offset:3px}
-</style><meta name="theme-color" content="#682c35"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Tornista"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="pwa-180.png"><style>.jad-pwa{position:relative;margin:24px auto;max-width:min(640px,calc(100% - 24px));font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#342820;background:#fffaf0;border:1px solid #d5c5a9;border-radius:9px;box-shadow:0 3px 16px #34282026}.jad-pwa details{padding:0 12px}.jad-pwa summary{cursor:pointer;min-height:44px;display:list-item;padding:11px 0;list-style-position:inside;font-weight:600;color:#682c35}.jad-pwa p{margin:8px 0 12px}.jad-pwa button{font:inherit;min-height:44px;padding:8px 12px;border:1px solid #d5c5a9;border-radius:6px;background:#fffaf0;color:#682c35;cursor:pointer}.jad-pwa button:disabled{opacity:.6;cursor:default}.jad-pwa button:focus-visible,.jad-pwa summary:focus-visible{outline:3px solid #9b6731;outline-offset:2px}.jad-pwa [hidden]{display:none!important}.jad-pwa details[open]{max-height:65vh;overflow:auto;padding-bottom:12px}.jad-pwa #pwa-update{padding:10px 12px;border-top:1px solid #d5c5a9}.jad-pwa .pwa-actions{display:flex;gap:8px;flex-wrap:wrap}#pwa-apply{background:#682c35;color:#fffaf0}#pwa-progress{max-width:min(420px,calc(100vw - 30px));border:1px solid #d5c5a9;border-radius:9px;background:#fffaf0;color:#342820;padding:20px}#pwa-progress::backdrop{background:#34282066}
+</style><meta name="theme-color" content="#10252a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Tornista"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="pwa-180.png"><style>.jad-pwa{position:relative;margin:24px auto;max-width:min(640px,calc(100% - 24px));font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#342820;background:#fffaf0;border:1px solid #d5c5a9;border-radius:9px;box-shadow:0 3px 16px #34282026}.jad-pwa details{padding:0 12px}.jad-pwa summary{cursor:pointer;min-height:44px;display:list-item;padding:11px 0;list-style-position:inside;font-weight:600;color:#682c35}.jad-pwa p{margin:8px 0 12px}.jad-pwa button{font:inherit;min-height:44px;padding:8px 12px;border:1px solid #d5c5a9;border-radius:6px;background:#fffaf0;color:#682c35;cursor:pointer}.jad-pwa button:disabled{opacity:.6;cursor:default}.jad-pwa button:focus-visible,.jad-pwa summary:focus-visible{outline:3px solid #9b6731;outline-offset:2px}.jad-pwa [hidden]{display:none!important}.jad-pwa details[open]{max-height:65vh;overflow:auto;padding-bottom:12px}.jad-pwa #pwa-update{padding:10px 12px;border-top:1px solid #d5c5a9}.jad-pwa .pwa-actions{display:flex;gap:8px;flex-wrap:wrap}#pwa-apply{background:#682c35;color:#fffaf0}#pwa-progress{max-width:min(420px,calc(100vw - 30px));border:1px solid #d5c5a9;border-radius:9px;background:#fffaf0;color:#342820;padding:20px}#pwa-progress::backdrop{background:#34282066}
 </style></head>
 <body>
   <a class="skip-link" href="#obsah">Přejít k obsahu</a>
@@ -97,8 +101,9 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
       <p class="eyebrow">Další cesta Tornisty</p><h2 id="roadmap-title">Na čem pracuju</h2>
       <ol class="roadmap-track">
         <li class="roadmap-now"><span class="roadmap-state">Průběžně</span><h3>Testování deníku</h3><p>Ověřování funkcí a opravy chyb při hraní.</p></li>
-        <li class="roadmap-now"><span class="roadmap-state">Probíhá</span><h3>Nové skiny deníku</h3><p>Úpravy rozhraní a volitelné barevné palety.</p></li>
-        <li><span class="roadmap-state">Později</span><h3>Vlastní vzhled</h3><p>Vlastní barvy, pozadí a skiny.</p></li>
+        <li class="roadmap-done"><span class="roadmap-state">Dokončeno</span><h3>Nové skiny deníku</h3><p>Zdobený deník a volitelné barevné palety.</p></li>
+        <li class="roadmap-done"><span class="roadmap-state">Dokončeno</span><h3>Vlastní vzhled</h3><p>Vlastní barvy a obrázek pozadí, tmavé zobrazení.</p></li>
+        <li class="roadmap-now"><span class="roadmap-state">Probíhá</span><h3>Optimalizace UI</h3><p>Testování čitelnosti a pohodlného ovládání na telefonu, tabletu i počítači.</p></li>
         <li><span class="roadmap-state">Vzdálenější plán</span><h3>Z digitálu na papír</h3><p>Přenos postavy do vyplněného PDF deníku k tisku.</p></li>
       </ol>
     </section>
@@ -135,7 +140,7 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
  dialog.addEventListener('close',()=>trigger.focus());
 })();
 </script><aside class="jad-pwa" aria-label="Aplikace a offline provoz">
-  <details id="pwa-tools"><summary>Aplikace · v1.2</summary>
+  <details id="pwa-tools"><summary>Aplikace · v1.3</summary>
     <p id="pwa-status" role="status">Připravuji použití bez internetu…</p>
     <button type="button" id="pwa-install" hidden>Nainstalovat aplikaci</button>
     <p>Aplikaci můžeš přidat na plochu z nabídky prohlížeče. V Safari použij Sdílet → Přidat na plochu. Na počítači hledej možnost instalace v adresním řádku nebo nabídce.</p>
@@ -148,8 +153,10 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
 <script>'use strict';
 (()=>{
  const status=document.getElementById('pwa-status'),banner=document.getElementById('pwa-update'),text=document.getElementById('pwa-update-text'),apply=document.getElementById('pwa-apply'),check=document.getElementById('pwa-check'),install=document.getElementById('pwa-install'),progress=document.getElementById('pwa-progress');
- document.addEventListener('click',event=>{if(!event.target.closest('[data-action="pwa-open"]'))return;const tools=document.getElementById('pwa-tools');tools.open=true;tools.scrollIntoView({block:'center'});tools.querySelector('summary').focus({preventScroll:true});});
+ document.addEventListener('click',event=>{if(!event.target.closest('[data-action="pwa-open"]'))return;if(event.target.closest('#journal-update-status'))banner.hidden=false;const tools=document.getElementById('pwa-tools');tools.open=true;tools.scrollIntoView({block:'center'});tools.querySelector('summary').focus({preventScroll:true});});
  let registration=null,installPrompt=null,applying=false,reloadPending=false,applyTimer;
+ const journalUpdate=document.getElementById('journal-update-status');
+ function journalOffer(available){if(journalUpdate)journalUpdate.hidden=!available;}
  const guard=()=>{try{return window.JAD_PWA_GUARD?.()||'';}catch{return 'Nejprve dokonči rozpracovanou práci.';}};
  const ask=(worker,type)=>new Promise((resolve,reject)=>{
   if(!worker){reject(Error('Worker unavailable'));return;}
@@ -163,6 +170,7 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
  }
  async function offer(){
   if(!registration?.waiting||!registration.active)return;
+  journalOffer(true);
   banner.hidden=false;
   text.textContent='Je dostupná nová verze Tornisty. Aktualizuj, až dokončíš práci.';
   try{const info=await ask(registration.waiting,'STATUS');text.textContent='Je připravená verze '+info.version+'. Aktualizuj, až dokončíš práci.';}catch{}
@@ -172,7 +180,7 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
  apply.addEventListener('click',async()=>{
   const reason=guard();if(reason){text.textContent=reason;return;}
   if(reloadPending){finishReload();return;}
-  if(!registration?.waiting){text.textContent='Nová verze už není připravená. Zkus zkontrolovat aktualizaci.';return;}
+  if(!registration?.waiting){journalOffer(false);text.textContent='Nová verze už není připravená. Zkus zkontrolovat aktualizaci.';return;}
   applying=true;apply.disabled=true;progress.showModal();
   applyTimer=setTimeout(()=>failUpdate('Aktualizaci se nepodařilo dokončit. Zkus ji později.'),15000);
   try{const result=await ask(registration.waiting,'APPLY_UPDATE');if(!result.ok)failUpdate('Nejprve zavři ostatní karty a okna Tornisty, potom zkus Aktualizovat znovu.');}catch{failUpdate('Aktualizace teď není dostupná. Tvoje postava zůstává zachovaná.');}
@@ -185,12 +193,12 @@ body{background:var(--bg);position:relative;isolation:isolate}body:before{conten
  if(!('serviceWorker' in navigator)||!window.isSecureContext){status.textContent='Tento prohlížeč nepodporuje offline přípravu. Web můžeš používat s internetem.';check.disabled=true;return;}
  navigator.serviceWorker.addEventListener('controllerchange',()=>{
   if(applying){const reason=guard();if(reason){reloadPending=true;failUpdate(reason);return;}finishReload();}
-  else if(registration)offlineStatus(); // Never reload another page automatically.
+  else if(registration){journalOffer(!!registration.waiting);offlineStatus();} // Never reload another page automatically.
  });
  check.addEventListener('click',async()=>{
   if(!registration)return;
   check.disabled=true;status.textContent='Kontroluji dostupnou verzi…';
-  try{await registration.update();await offlineStatus();if(registration.waiting)await offer();else status.textContent+=registration.installing?' Připravuji novou verzi…':' Kontrola dokončena.';}catch{status.textContent='Kontrola není dostupná. Pokud máš offline verzi připravenou, můžeš pokračovat bez internetu.';}finally{check.disabled=false;}
+  try{await registration.update();await offlineStatus();journalOffer(!!registration.waiting);if(registration.waiting)await offer();else status.textContent+=registration.installing?' Připravuji novou verzi…':' Kontrola dokončena.';}catch{status.textContent='Kontrola není dostupná. Pokud máš offline verzi připravenou, můžeš pokračovat bez internetu.';}finally{check.disabled=false;}
  });
  for(const event of ['online','offline'])window.addEventListener(event,()=>{if(registration)offlineStatus();});
  navigator.serviceWorker.register(new URL('sw.js',location.href),{scope:'./',updateViaCache:'none'}).then(reg=>{

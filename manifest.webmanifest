@@ -7,8 +7,8 @@
   "start_url": "./denik.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#ede2cd",
-  "theme_color": "#682c35",
+  "background_color": "#071419",
+  "theme_color": "#10252a",
   "icons": [
     {
       "src": "pwa-192.png",
