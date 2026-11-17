@@ -88,12 +88,23 @@ body[data-skin] #pwa-dialog summary{color:var(--appearance-heading,var(--skin-he
 body[data-skin] #pwa-dialog button{background:var(--appearance-raised,#f5ecd8);color:var(--appearance-text,#302d27);border-color:var(--skin-accent,#a58b59)}
 body[data-skin] #pwa-dialog #pwa-apply{background:var(--skin-deep,#10252a);color:var(--skin-on-deep,#f4ead5)}
 body[data-skin] #pwa-dialog #pwa-update{border-color:var(--skin-accent,#a58b59)}
+/* One readable status, with its meaning beside the actual colored dot. */
+#pwa-dialog #pwa-tools{padding:0 6px}#pwa-dialog #pwa-title{font:600 23px/1.3 Georgia,serif;color:inherit;margin:0 0 22px}#pwa-title:focus{outline:none}
+#pwa-dialog .pwa-state{display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:10px;line-height:1.6;margin:0 0 20px;background:color-mix(in srgb,currentColor 4%,transparent)}
+.pwa-state::before{content:"";flex:0 0 9px;width:9px;height:9px;margin-top:7px;border-radius:50%;background:#8b959b;box-shadow:0 0 0 3px #8b959b18}.pwa-state[data-offline-state="ready"]::before{background:#258859;box-shadow:0 0 0 3px #25885922}.pwa-state.pwa-update-state::before{background:#b77316;box-shadow:0 0 0 3px #b7731622}
+#pwa-dialog #pwa-update{padding:0;border:0;margin-bottom:20px}#pwa-dialog .pwa-facts{margin:0 0 18px;display:grid;gap:12px}.pwa-facts>div{display:grid;grid-template-columns:90px 1fr;gap:12px}.pwa-facts dt{font-weight:600}.pwa-facts dd{margin:0}#pwa-dialog .pwa-mode{font-size:12px;opacity:.8;margin-bottom:18px}.pwa-bottom-actions{align-items:center;gap:12px 20px!important}.pwa-bottom-actions a{color:inherit;min-height:44px;display:inline-flex;align-items:center;text-underline-offset:4px}#pwa-dialog .pwa-actions button:focus-visible,.pwa-bottom-actions a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+body[data-color-mode="dark"] .pwa-state[data-offline-state="ready"]::before{background:#49c887}body[data-color-mode="dark"] .pwa-update-state::before{background:#f0b34d}
+@media(max-width:450px){#pwa-dialog{padding:16px}#pwa-dialog #pwa-title{font-size:21px}.pwa-facts>div{grid-template-columns:76px 1fr;gap:8px}}
+/* All possible version-dot states, with the current one identified in text. */
+#pwa-dialog .pwa-states{list-style:none;padding:6px 16px;margin:0 0 18px;border:1px solid color-mix(in srgb,currentColor 20%,transparent);border-radius:12px;background:color-mix(in srgb,currentColor 3%,transparent)}
+.pwa-states li{display:flex;align-items:flex-start;gap:13px;padding:14px 0}.pwa-states li+li{border-top:1px solid color-mix(in srgb,currentColor 12%,transparent)}.pwa-states .pwa-dot{flex:0 0 9px;width:9px;height:9px;margin-top:7px;border-radius:50%;background:#8b959b;box-shadow:0 0 0 3px #8b959b18}.pwa-states [data-pwa-state="ready"] .pwa-dot{background:#258859;box-shadow:0 0 0 3px #25885922}.pwa-states [data-pwa-state="update"] .pwa-dot{background:#b77316;box-shadow:0 0 0 3px #b7731622}
+#pwa-dialog .pwa-states p{font-size:13px;line-height:1.6;margin:4px 0 0}.pwa-states strong{font-size:14px}.pwa-current{display:inline-block;margin:0 0 0 10px;padding:2px 7px;border:1px solid color-mix(in srgb,currentColor 30%,transparent);border-radius:5px;font:600 10px/1.5 system-ui;vertical-align:1px}.is-current strong{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}#pwa-dialog .pwa-context{font-size:12px;line-height:1.6;margin:0 0 18px}body[data-color-mode="dark"] .pwa-states [data-pwa-state="ready"] .pwa-dot{background:#49c887}body[data-color-mode="dark"] .pwa-states [data-pwa-state="update"] .pwa-dot{background:#f0b34d}
 </style></head>
 <body>
   <a class="skip-link" href="#obsah">Přejít k obsahu</a>
   <header class="welcome-header wrap">
     <a class="brand" href="index.html" aria-label="JaD Tornista — úvod"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+CiAgPGcgc3Ryb2tlPSIjMzgyNTFjIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgICA8cGF0aCBkPSJNMTUgMjR2LTVDMTUgOCA0OSA4IDQ5IDE5djUiIHN0cm9rZT0iI2Q3YWY3MCIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICA8cmVjdCB4PSI5IiB5PSIyMyIgd2lkdGg9IjQ2IiBoZWlnaHQ9IjM1IiByeD0iNyIgZmlsbD0iI2I3N2IzNSIvPgogICAgPHBhdGggZD0iTTkgMjRhNSA1IDAgMCAxIDUtNWgzNmE1IDUgMCAwIDEgNSA1djEyYy0xMiA5LTM0IDktNDYgMFoiIGZpbGw9IiNlMGFkNTUiLz4KICAgIDxwYXRoIGQ9Ik0yOCAyMGg4djMzaC04eiIgZmlsbD0iIzc5NTAzNSIvPgogICAgPHBhdGggZD0ibTMyIDI5IDExIDd2MTJsLTExIDctMTEtN1YzNloiIGZpbGw9IiNmNmQ3OGQiIHN0cm9rZS13aWR0aD0iMi41Ii8+CiAgICA8cGF0aCBkPSJtMzIgMjktNyAxNmgxNFptLTExIDcgNCA5LTQgM20yMi0xMi00IDkgNCAzbS0xOC0zIDcgMTAgNy0xMCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="" width="48" height="48"><span>JaD Tornista <b class="beta-badge">Beta</b><small>Komunitní deník pro Jeskyně a draky</small></span></a>
-    <nav aria-label="Hlavní navigace"><a class="button install-entry" href="#instalace" data-action="install-guide">Nainstalovat</a><a class="button" href="denik.html">Otevřít deník <span aria-hidden="true">↗</span></a><button class="welcome-version app-version" type="button" data-action="pwa-open" aria-label="Verze 1.4 a stav aplikace" aria-haspopup="dialog">v1.4</button></nav>
+    <nav aria-label="Hlavní navigace"><a class="button install-entry" href="#instalace" data-action="install-guide">Nainstalovat</a><a class="button" href="denik.html">Otevřít deník <span aria-hidden="true">↗</span></a><button class="welcome-version app-version" type="button" data-action="pwa-open" aria-label="Verze 1.4.1 a stav aplikace" aria-haspopup="dialog">v1.4.1</button></nav>
   </header>
   <main id="obsah" class="wrap">
     <section class="hero" aria-labelledby="hero-title">
@@ -202,14 +213,19 @@ body[data-skin] #pwa-dialog #pwa-update{border-color:var(--skin-accent,#a58b59)}
  dialog.addEventListener('close',()=>trigger.focus());
 })();
 </script><dialog id="pwa-dialog" class="jad-pwa" aria-label="Aplikace a offline provoz"><form method="dialog"><button aria-label="Zavřít stav aplikace">Zavřít</button></form>
-  <details id="pwa-tools"><summary>Aplikace · v1.4</summary>
-    <p id="pwa-installation-status"></p><p class="pwa-legend">Tečka u verze: zelená = offline připraveno, oranžová = nová verze, šedá = připravenost neověřena. Uložení postavy se hlásí samostatně.</p><p id="pwa-save-status"></p><p id="pwa-connection" role="status"></p><p id="pwa-status" role="status">Připravuji použití bez internetu…</p>
+  <section id="pwa-tools" aria-labelledby="pwa-title"><h2 id="pwa-title" tabindex="-1">Aplikace · v1.4.1</h2>
+    <ul class="pwa-states" aria-label="Význam barevné tečky u verze">
+      <li data-pwa-state="ready"><span class="pwa-dot" aria-hidden="true"></span><div><strong>Offline připraveno</strong><span class="pwa-current" hidden>Právě teď</span><p>Deník i tvorba fungují bez internetu.</p></div></li>
+      <li data-pwa-state="update"><span class="pwa-dot" aria-hidden="true"></span><div><strong>Nová verze</strong><span class="pwa-current" hidden>Právě teď</span><p>Aktualizace je připravená. Použij ji, až dokončíš práci.</p></div></li>
+      <li data-pwa-state="unknown"><span class="pwa-dot" aria-hidden="true"></span><div><strong>Připravenost neověřena</strong><span class="pwa-current" hidden>Právě teď</span><p>Použití bez internetu zatím není potvrzené — například u místního HTML souboru nebo během přípravy.</p></div></li>
+    </ul>
+    <p id="pwa-status" class="pwa-context" role="status">Připravuji použití bez internetu…</p>
+    <div id="pwa-update" hidden><p id="pwa-update-text" class="pwa-state pwa-update-state" role="status">Nová verze je připravená. Použij Aktualizovat, až dokončíš práci.</p><div class="pwa-actions"><button type="button" id="pwa-apply">Aktualizovat</button><button type="button" id="pwa-later">Později</button></div></div>
+    <dl class="pwa-facts"><div><dt>Připojení</dt><dd id="pwa-connection" role="status"></dd></div><div><dt>Postava</dt><dd id="pwa-save-status"></dd></div></dl>
+    <p id="pwa-installation-status" class="pwa-mode"></p>
     <button type="button" id="pwa-install" hidden>Nainstalovat aplikaci</button>
-    <p>Aplikaci můžeš přidat na plochu z nabídky prohlížeče. V Safari použij Sdílet → Přidat na plochu. Na počítači hledej možnost instalace v adresním řádku nebo nabídce.</p>
-    <p>Před instalací si exportuj JSON. Pokud se v instalované aplikaci postava neobjeví, načti ji ze zálohy.</p>
-    <button type="button" id="pwa-check">Zkontrolovat aktualizaci</button>
-  </details>
-  <div id="pwa-update" hidden><p id="pwa-update-text" role="status">Je dostupná nová verze Tornisty.</p><div class="pwa-actions"><button type="button" id="pwa-apply">Aktualizovat</button><button type="button" id="pwa-later">Později</button></div></div>
+    <div class="pwa-actions pwa-bottom-actions"><button type="button" id="pwa-check">Zkontrolovat aktualizaci</button></div>
+  </section>
 </dialog>
 <dialog id="pwa-progress" aria-labelledby="pwa-progress-title"><h2 id="pwa-progress-title">Aktualizuji Tornistu</h2><p>Počkej prosím na načtení nové verze.</p></dialog>
 <script>'use strict';
@@ -217,23 +233,27 @@ body[data-skin] #pwa-dialog #pwa-update{border-color:var(--skin-accent,#a58b59)}
  const status=document.getElementById('pwa-status'),banner=document.getElementById('pwa-update'),text=document.getElementById('pwa-update-text'),apply=document.getElementById('pwa-apply'),check=document.getElementById('pwa-check'),install=document.getElementById('pwa-install'),progress=document.getElementById('pwa-progress');
  const panel=document.getElementById('pwa-dialog'),save=document.getElementById('save-status');
  function saveInfo(){document.getElementById('pwa-save-status').textContent=save?.textContent||'Postava se ukládá místně v zařízení.';}
- function connectionInfo(){const offline=!navigator.onLine,label=document.getElementById('app-connection');if(label)label.hidden=!offline;document.getElementById('pwa-connection').textContent=offline?'Offline · Aktualizace nelze ověřit.':'Online · Připojení hlášené prohlížečem.';}
+ function connectionInfo(){const offline=!navigator.onLine,label=document.getElementById('app-connection');if(label)label.hidden=!offline;document.getElementById('pwa-connection').textContent=offline?'Offline · Aktualizace nelze ověřit.':'Online';}
  connectionInfo();saveInfo();
  if(save)new MutationObserver(saveInfo).observe(save,{childList:true,subtree:true,characterData:true});
- document.addEventListener('click',event=>{if(!event.target.closest('[data-action="pwa-open"]'))return;if(event.target.closest('#journal-update-status'))banner.hidden=false;const tools=document.getElementById('pwa-tools');tools.open=true;if(panel&&!panel.open)panel.showModal();saveInfo();tools.querySelector('summary').focus({preventScroll:true});});
+ document.addEventListener('click',event=>{if(!event.target.closest('[data-action="pwa-open"]'))return;if(updateAvailable){banner.hidden=false;status.hidden=true;}if(panel&&!panel.open)panel.showModal();saveInfo();document.getElementById('pwa-title').focus({preventScroll:true});});
  let registration=null,installPrompt=null,applying=false,reloadPending=false,applyTimer;
  const journalUpdate=document.getElementById('journal-update-status');
  let offlineReadiness=location.protocol==='file:'?'local':'pending',updateAvailable=false;
  function indicator(){
+  status.dataset.offlineState=offlineReadiness;
+  status.hidden=updateAvailable||offlineReadiness==='ready';
+  const current=updateAvailable?'update':offlineReadiness==='ready'?'ready':'unknown';
+  for(const row of document.querySelectorAll('[data-pwa-state]')){const active=row.dataset.pwaState===current;row.classList.toggle('is-current',active);if(active)row.setAttribute('aria-current','true');else row.removeAttribute('aria-current');row.querySelector('.pwa-current').hidden=!active;}
   const labels={local:'Místní soubor · offline přípravu nelze ověřit',pending:'Ověřuji připravenost bez internetu',ready:'Offline připraveno',unknown:'Offline příprava není ověřená',incomplete:'Offline příprava není úplná'};
   for(const button of document.querySelectorAll('#app-version,.app-version')){button.dataset.offlineState=offlineReadiness;button.classList.toggle('update-ready',updateAvailable);button.title=updateAvailable?'Nová verze připravena · '+labels[offlineReadiness]:labels[offlineReadiness];button.setAttribute('aria-label',button.textContent+' · '+button.title);}
  }
  indicator();
  const displayMode=window.matchMedia?.('(display-mode: standalone)');
- function installationInfo(){const target=document.getElementById('pwa-installation-status');if(target)target.textContent=location.protocol==='file:'?'Otevřený místní HTML soubor.':navigator.standalone===true||displayMode?.matches?'Otevřeno jako samostatná aplikace.':'Otevřeno v prohlížeči. Instalaci na zařízení nelze z této karty spolehlivě potvrdit.';}
+ function installationInfo(){const target=document.getElementById('pwa-installation-status');if(target){target.hidden=location.protocol==='file:';target.textContent=location.protocol==='file:'?'Otevřený místní HTML soubor.':navigator.standalone===true||displayMode?.matches?'Otevřeno jako samostatná aplikace.':'Otevřeno v prohlížeči.';}}
  installationInfo();displayMode?.addEventListener?.('change',installationInfo);
 
- function journalOffer(available){updateAvailable=available;if(journalUpdate)journalUpdate.hidden=!available;indicator();}
+ function journalOffer(available){updateAvailable=available;if(journalUpdate)journalUpdate.hidden=!available;if(!available)status.hidden=false;indicator();}
  const guard=()=>{try{return window.JAD_PWA_GUARD?.()||'';}catch{return 'Nejprve dokonči rozpracovanou práci.';}};
  const ask=(worker,type)=>new Promise((resolve,reject)=>{
   if(!worker){reject(Error('Worker unavailable'));return;}
@@ -241,16 +261,16 @@ body[data-skin] #pwa-dialog #pwa-update{border-color:var(--skin-accent,#a58b59)}
   channel.port1.onmessage=event=>{clearTimeout(timer);channel.port1.close();resolve(event.data);};
   worker.postMessage({type},[channel.port2]);
  });
- const connection=()=>navigator.onLine?'Offline připraveno. Deník i tvorba fungují bez internetu.':'Jsi bez internetu. Používáš připravenou verzi aplikace.';
+ const connection=()=>'Offline připraveno — deník i tvorba fungují bez internetu.';
  async function offlineStatus(){
   try{const info=await ask(registration?.active,'STATUS');offlineReadiness=info.complete?'ready':'incomplete';indicator();status.textContent=info.complete?connection():'Offline příprava není úplná. Připoj se a zkus kontrolu znovu.';}catch{offlineReadiness='unknown';indicator();status.textContent='Offline přípravu se nepodařilo ověřit. Prozatím zůstaň připojený k internetu.';}
  }
  async function offer(){
   if(!registration?.waiting||!registration.active)return;
   journalOffer(true);
-  banner.hidden=false;
-  text.textContent='Je dostupná nová verze Tornisty. Aktualizuj, až dokončíš práci.';
-  try{const info=await ask(registration.waiting,'STATUS');text.textContent='Je připravená verze '+info.version+'. Aktualizuj, až dokončíš práci.';}catch{}
+  banner.hidden=false;status.hidden=true;
+  text.textContent='Nová verze je připravená — použij Aktualizovat, až dokončíš práci.';
+  try{const info=await ask(registration.waiting,'STATUS');text.textContent='Nová verze '+info.version+' je připravená — použij Aktualizovat, až dokončíš práci.';}catch{}
  }
  function finishReload(){clearTimeout(applyTimer);window.location.reload();}
  function failUpdate(message){applying=false;clearTimeout(applyTimer);if(progress.open)progress.close();apply.disabled=false;text.textContent=message;banner.hidden=false;}
@@ -263,7 +283,7 @@ body[data-skin] #pwa-dialog #pwa-update{border-color:var(--skin-accent,#a58b59)}
   try{const result=await ask(registration.waiting,'APPLY_UPDATE');if(!result.ok)failUpdate('Nejprve zavři ostatní karty a okna Tornisty, potom zkus Aktualizovat znovu.');}catch{failUpdate('Aktualizace teď není dostupná. Tvoje postava zůstává zachovaná.');}
  });
  progress.addEventListener('cancel',event=>{if(applying)event.preventDefault();});
- document.getElementById('pwa-later').addEventListener('click',()=>{banner.hidden=true;});
+ document.getElementById('pwa-later').addEventListener('click',()=>{banner.hidden=true;status.hidden=offlineReadiness==='ready';});
  window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;install.hidden=false;});
  install.addEventListener('click',async()=>{const prompt=installPrompt;if(!prompt)return;try{await prompt.prompt();await prompt.userChoice;}catch{}installPrompt=null;install.hidden=true;});
  window.addEventListener('appinstalled',()=>{install.hidden=true;installPrompt=null;});
